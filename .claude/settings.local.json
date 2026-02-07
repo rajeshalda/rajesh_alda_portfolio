@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:meeting-time-tracker-app.vercel.app)",
+      "WebFetch(domain:local-notebook-lm-app.vercel.app)"
+    ]
+  }
+}
