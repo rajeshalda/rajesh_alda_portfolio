@@ -527,7 +527,7 @@ section {
 }
 
 /* ═══════════════════════════════════════════════
-   PROJECTS — 3D FLIP CARDS
+   PROJECTS — SHOWCASE CARDS
    ═══════════════════════════════════════════════ */
 .projects-grid {
   display: grid;
@@ -536,116 +536,116 @@ section {
 }
 
 .project-card {
-  perspective: 1000px;
-  height: 400px;
+  position: relative;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   opacity: 0;
-  transform: translateY(40px) rotateX(10deg);
-  transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+  transform: translateY(30px);
+  transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo), border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .revealed .project-card {
   opacity: 1;
-  transform: translateY(0) rotateX(0);
+  transform: translateY(0);
 }
 
 .revealed .project-card:nth-child(2) { transition-delay: 0.15s; }
 .revealed .project-card:nth-child(3) { transition-delay: 0.3s; }
 
-.card-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transition: transform 0.8s var(--ease-spring);
-  transform-style: preserve-3d;
-}
-
-.project-card:hover .card-inner {
-  transform: rotateY(180deg);
-}
-
-.card-face {
+.project-card::before {
+  content: '';
   position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  border-radius: 20px;
-  border: 1px solid var(--glass-border);
-  overflow: hidden;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gradient-main);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-.card-front {
-  background: var(--glass-bg);
-  backdrop-filter: blur(20px);
-  display: flex;
-  flex-direction: column;
-  padding: 30px;
+.project-card:hover {
+  border-color: rgba(123,47,255,0.3);
+  box-shadow: 0 12px 40px rgba(123,47,255,0.1);
+  transform: translateY(-6px);
 }
 
-.card-front .project-icon {
-  font-size: 3rem;
+.project-card:hover::before {
+  opacity: 1;
+}
+
+.project-num {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent-1);
+  opacity: 0.5;
   margin-bottom: 20px;
 }
 
-.card-front h3 {
-  font-size: 1.4rem;
-  font-weight: 700;
-  margin-bottom: 12px;
+.project-card .project-icon {
+  font-size: 2.5rem;
+  margin-bottom: 18px;
 }
 
-.card-front p {
+.project-card h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--text-primary);
+}
+
+.project-card .project-desc {
   color: var(--text-secondary);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   line-height: 1.7;
+  margin-bottom: 20px;
   flex: 1;
 }
 
-.card-front .tech-tags {
+.project-card .tech-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-top: 16px;
+  margin-bottom: 24px;
 }
 
 .tech-tag {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   padding: 4px 12px;
   border-radius: 20px;
-  background: rgba(123,47,255,0.15);
+  background: rgba(123,47,255,0.1);
   color: var(--accent-2);
-  border: 1px solid rgba(123,47,255,0.2);
+  border: 1px solid rgba(123,47,255,0.15);
 }
 
-.card-back {
-  background: linear-gradient(135deg, var(--bg-secondary), #1a1a2e);
-  transform: rotateY(180deg);
-  display: flex;
-  flex-direction: column;
+.project-link {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  padding: 30px;
-  text-align: center;
-}
-
-.card-back h3 {
-  font-size: 1.3rem;
-  margin-bottom: 12px;
-  background: var(--gradient-main);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.card-back p {
-  color: var(--text-secondary);
-  font-size: 0.9rem;
-  margin-bottom: 24px;
-  line-height: 1.7;
-}
-
-.card-back .btn {
+  gap: 6px;
   font-size: 0.85rem;
-  padding: 10px 24px;
+  font-weight: 600;
+  color: var(--accent-2);
+  text-decoration: none;
+  transition: gap 0.3s ease, color 0.3s ease;
+}
+
+.project-link:hover {
+  color: var(--accent-1);
+  gap: 10px;
+}
+
+.project-link svg {
+  transition: transform 0.3s ease;
+}
+
+.project-link:hover svg {
+  transform: translateX(2px);
 }
 
 /* ═══════════════════════════════════════════════
@@ -1243,7 +1243,7 @@ nav.visible { transform: translateY(0); }
   .hex-name { font-size: 0.78rem; }
 
   .projects-grid { grid-template-columns: 1fr; }
-  .project-card { height: 350px; }
+  .project-card { padding: 24px; }
 
   .section-title { font-size: clamp(1.5rem, 6vw, 2.5rem); margin-bottom: 24px; }
   .section-label { font-size: 0.7rem; letter-spacing: 2px; }
@@ -1269,7 +1269,7 @@ nav.visible { transform: translateY(0); }
 @media (max-width: 380px) {
   .fun-facts { justify-content: center; }
   .hero-cta .btn { padding: 12px 20px; font-size: 0.85rem; }
-  .project-card { height: 320px; }
+  .project-card { padding: 20px; }
   .card-front { padding: 20px; }
   .card-front h3 { font-size: 1.1rem; }
   .card-front p { font-size: 0.85rem; }
@@ -1396,46 +1396,38 @@ nav.visible { transform: translateY(0); }
     <h2 class="section-title">Featured Projects</h2>
     <div class="projects-grid">
 
-      <div class="project-card">
-        <div class="card-inner">
-          <div class="card-face card-front">
-            <div class="project-icon">⏱️</div>
-            <h3>Meeting Time Tracker</h3>
-            <p>AI-powered tool that automatically matches Microsoft Teams meetings with project tasks and generates time entries without manual intervention.</p>
-            <div class="tech-tags">
-              <span class="tech-tag">Next.js</span>
-              <span class="tech-tag">React</span>
-              <span class="tech-tag">AI Matching</span>
-              <span class="tech-tag">MS Teams</span>
-            </div>
-          </div>
-          <div class="card-face card-back">
-            <h3>Meeting Time Tracker</h3>
-            <p>Streamlines timesheet management with AI-driven meeting-to-task correlation, automated time entry posting, and interactive demo mode.</p>
-            <a href="https://meeting-time-tracker-app.vercel.app/" target="_blank" class="btn btn-primary" data-magnetic>View Live →</a>
-          </div>
+      <div class="project-card" data-magnetic>
+        <div class="project-num">01</div>
+        <div class="project-icon">⏱️</div>
+        <h3>Meeting Time Tracker</h3>
+        <p class="project-desc">AI-powered tool that automatically matches Microsoft Teams meetings with project tasks and generates time entries without manual intervention.</p>
+        <div class="tech-tags">
+          <span class="tech-tag">Next.js</span>
+          <span class="tech-tag">React</span>
+          <span class="tech-tag">AI Matching</span>
+          <span class="tech-tag">MS Teams</span>
         </div>
+        <a href="https://meeting-time-tracker-app.vercel.app/" target="_blank" rel="noopener" class="project-link">
+          View Live
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
       </div>
 
-      <div class="project-card">
-        <div class="card-inner">
-          <div class="card-face card-front">
-            <div class="project-icon">📄</div>
-            <h3>Local NotebookLM</h3>
-            <p>Privacy-focused RAG document chat app. Index local documents and ask questions — all processing happens on your machine, nothing leaves your computer.</p>
-            <div class="tech-tags">
-              <span class="tech-tag">Python</span>
-              <span class="tech-tag">FastAPI</span>
-              <span class="tech-tag">ChromaDB</span>
-              <span class="tech-tag">Ollama</span>
-            </div>
-          </div>
-          <div class="card-face card-back">
-            <h3>Local NotebookLM</h3>
-            <p>A local-first RAG application using Ollama for LLM inference, ChromaDB for vector storage, and FastAPI for the backend. Chat with your documents privately.</p>
-            <a href="https://local-notebook-lm-app.vercel.app/" target="_blank" class="btn btn-primary" data-magnetic>View Live →</a>
-          </div>
+      <div class="project-card" data-magnetic>
+        <div class="project-num">02</div>
+        <div class="project-icon">📄</div>
+        <h3>Local NotebookLM</h3>
+        <p class="project-desc">Privacy-focused RAG document chat app. Index local documents and ask questions — all processing happens on your machine, nothing leaves your computer.</p>
+        <div class="tech-tags">
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">FastAPI</span>
+          <span class="tech-tag">ChromaDB</span>
+          <span class="tech-tag">Ollama</span>
         </div>
+        <a href="https://local-notebook-lm-app.vercel.app/" target="_blank" rel="noopener" class="project-link">
+          View Live
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
       </div>
 
     </div>
