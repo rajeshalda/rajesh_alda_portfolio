@@ -1624,7 +1624,7 @@ nav.visible { transform: translateY(0); }
 
 <!-- Footer -->
 <footer>
-  <p>Designed & Built by Rajesh Alda — © 2026</p>
+  <p>Designed & Built by Rajesh Alda — © 2023–<span id="footer-year"></span></p>
   <p class="easter-egg-hint">↑↑↓↓←→←→BA</p>
 </footer>
 
@@ -2293,6 +2293,9 @@ nav.visible { transform: translateY(0); }
   }
 
   initCodeTyping();
+
+  // Dynamic footer year
+  document.getElementById('footer-year').textContent = new Date().getFullYear();
 
 })();
 </script>
