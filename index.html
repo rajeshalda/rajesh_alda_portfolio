@@ -990,6 +990,41 @@ footer p {
   font-size: 0.85rem;
 }
 
+.visitor-counter {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 6px 16px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.visitor-counter .visitor-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-2);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+.visitor-counter .visitor-number {
+  background: var(--gradient-main);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 600;
+}
+
 footer .easter-egg-hint {
   font-family: var(--font-mono);
   font-size: 0.7rem;
@@ -1108,6 +1143,11 @@ body.light-mode .nav-hamburger span {
 
 body.light-mode footer {
   border-top-color: rgba(0,0,0,0.06);
+}
+
+body.light-mode .visitor-counter {
+  background: rgba(0,0,0,0.04);
+  border-color: rgba(0,0,0,0.08);
 }
 
 /* ═══════════════════════════════════════════════
@@ -1661,8 +1701,48 @@ body.light-mode .nav-weather {
 <!-- Footer -->
 <footer>
   <p>Designed & Built by Rajesh Alda — © 2022–<span id="footer-year"></span></p>
+  <div class="visitor-counter">
+    <span class="visitor-dot"></span>
+    <span>Visitors: <span class="visitor-number" id="visitor-count">...</span></span>
+  </div>
   <p class="easter-egg-hint">↑↑↓↓←→←→BA</p>
 </footer>
+
+<!-- Firebase SDK (compat for simple usage) -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+<script>
+  // Firebase visitor counter
+  firebase.initializeApp({
+    apiKey: "AIzaSyCIQXX0FfpzuHh4xHiTvwtnNFIEEnkzulw",
+    authDomain: "rajesh-portfolio-b5445.firebaseapp.com",
+    databaseURL: "https://rajesh-portfolio-b5445-default-rtdb.firebaseio.com",
+    projectId: "rajesh-portfolio-b5445",
+    storageBucket: "rajesh-portfolio-b5445.firebasestorage.app",
+    messagingSenderId: "487017530094",
+    appId: "1:487017530094:web:536d58a3d2d609168429ff",
+    measurementId: "G-G9K7H008G9"
+  });
+
+  (function() {
+    var counterRef = firebase.database().ref('visitorCount');
+    var sessionKey = 'portfolio_visited';
+
+    // Only increment once per session
+    if (!sessionStorage.getItem(sessionKey)) {
+      counterRef.transaction(function(current) {
+        return (current || 0) + 1;
+      });
+      sessionStorage.setItem(sessionKey, 'true');
+    }
+
+    // Listen for real-time count updates
+    counterRef.on('value', function(snapshot) {
+      var count = snapshot.val() || 0;
+      document.getElementById('visitor-count').textContent = count.toLocaleString();
+    });
+  })();
+</script>
 
 <!-- Three.js CDN -->
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
