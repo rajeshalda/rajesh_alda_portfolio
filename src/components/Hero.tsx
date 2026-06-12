@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { ArrowDown } from 'lucide-react'
-
+import Magnetic from './Magnetic'
 const VIDEO_URL =
   'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260405_170732_8a9ccda6-5cff-4628-b164-059c500a2b41.mp4'
 
@@ -37,6 +37,13 @@ export default function Hero({ started }: { started: boolean }) {
   const videoY = useTransform(scrollYProgress, [0, 0.25], ['0%', '12%'])
   const fade = useTransform(scrollYProgress, [0, 0.18], [1, 0])
 
+  const videoRef = useRef<HTMLVideoElement>(null)
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      videoRef.current?.pause()
+    }
+  }, [])
+
   const [time, setTime] = useState('')
   useEffect(() => {
     const update = () =>
@@ -57,16 +64,17 @@ export default function Hero({ started }: { started: boolean }) {
   return (
     <section className="relative h-[100svh] overflow-hidden">
       <motion.video
+        ref={videoRef}
         src={VIDEO_URL}
         autoPlay
         loop
         muted
         playsInline
-        className="absolute inset-0 w-full h-full object-cover opacity-40"
+        className="absolute inset-0 w-full h-full object-cover opacity-45"
         style={{ y: videoY }}
       />
-      <div className="noise-overlay absolute inset-0 opacity-50 mix-blend-overlay pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-black" />
+      <div className="noise-overlay absolute inset-0 opacity-25 mix-blend-overlay pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-black pointer-events-none" />
 
       {/* top bar */}
       <motion.header
@@ -77,9 +85,11 @@ export default function Hero({ started }: { started: boolean }) {
       >
         <span>Rajesh Alda&nbsp;©2026</span>
         <span className="hidden md:block text-[#E1E0CC]/60">Ranchi, India — {time} IST</span>
-        <a href="#contact" className="hover:opacity-60 transition-opacity">
-          Contact ↗
-        </a>
+        <Magnetic strength={0.4}>
+          <a href="#contact" className="block px-2 py-1 hover:opacity-60 transition-opacity">
+            Contact ↗
+          </a>
+        </Magnetic>
       </motion.header>
 
       {/* center name */}

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
+import Magnetic from './Magnetic'
 
 const SOCIALS = [
   { label: 'GitHub', href: 'https://github.com/rajeshalda' },
@@ -45,17 +46,23 @@ export default function Footer() {
           <span className="outline-text">.</span>
         </motion.h2>
 
-        <motion.a
-          href="mailto:rajeshalda844@gmail.com"
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-          className="group mt-12 inline-flex items-center gap-3 rounded-full border border-[#E1E0CC]/30 px-7 sm:px-9 py-4 sm:py-5 text-sm sm:text-base uppercase tracking-[0.15em] hover:bg-[#E1E0CC] hover:text-black transition-colors duration-400"
+          className="mt-12"
         >
-          rajeshalda844@gmail.com
-          <ArrowUpRight className="w-5 h-5 group-hover:rotate-45 transition-transform duration-300" />
-        </motion.a>
+          <Magnetic strength={0.25}>
+            <a
+              href="mailto:rajeshalda844@gmail.com"
+              className="group inline-flex items-center gap-3 rounded-full border border-[#E1E0CC]/30 px-7 sm:px-9 py-4 sm:py-5 text-sm sm:text-base uppercase tracking-[0.15em] hover:bg-[#E1E0CC] hover:text-black transition-colors duration-400"
+            >
+              rajeshalda844@gmail.com
+              <ArrowUpRight className="w-5 h-5 group-hover:rotate-45 transition-transform duration-300" />
+            </a>
+          </Magnetic>
+        </motion.div>
 
         <div className="mt-20 sm:mt-28 flex flex-col md:flex-row md:items-end justify-between gap-8 border-t border-[#E1E0CC]/10 pt-8 pb-10">
           <div className="flex gap-6 sm:gap-8">

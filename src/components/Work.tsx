@@ -83,7 +83,6 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
 export default function Work() {
   return (
     <section id="projects" className="relative bg-black py-24 sm:py-32 md:py-44 px-5 sm:px-8 md:px-12">
-      <div className="bg-noise absolute inset-0 opacity-[0.12] pointer-events-none" />
       <div className="relative max-w-7xl mx-auto">
         <div className="flex items-end justify-between mb-12 sm:mb-16">
           <div>

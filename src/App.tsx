@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import Lenis from 'lenis'
 import Preloader from './components/Preloader'
 import Cursor from './components/Cursor'
+import Menu from './components/Menu'
 import Hero from './components/Hero'
 import Marquee from './components/Marquee'
 import About from './components/About'
@@ -14,6 +15,7 @@ export default function App() {
 
   useEffect(() => {
     const lenis = new Lenis({ lerp: 0.1 })
+    ;(window as unknown as { __lenis?: Lenis }).__lenis = lenis
     let raf: number
     const tick = (time: number) => {
       lenis.raf(time)
@@ -33,6 +35,7 @@ export default function App() {
   return (
     <main className="bg-black min-h-screen text-[#E1E0CC]">
       <Cursor />
+      <Menu />
       {!loaded && <Preloader onDone={() => setLoaded(true)} />}
       <Hero started={loaded} />
       <Marquee />
