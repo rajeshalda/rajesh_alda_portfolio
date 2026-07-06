@@ -103,7 +103,7 @@ export default function Hero({ started }: { started: boolean }) {
           animate={started ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 1.1, duration: 0.8 }}
         >
-          Associate Software Engineer
+          Software Engineer
         </motion.p>
         <h1 className="text-center text-[#E1E0CC] text-[18vw] md:text-[15vw]">
           <NameLine text="Rajesh" delay={0.15} started={started} />

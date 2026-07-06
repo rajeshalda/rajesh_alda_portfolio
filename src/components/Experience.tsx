@@ -9,11 +9,18 @@ interface Entry {
 
 const ENTRIES: Entry[] = [
   {
-    role: 'Associate Software Engineer',
+    role: 'Software Engineer',
     org: 'NathCorp Pvt. Ltd. — Ranchi, India',
     period: 'Present',
     description:
-      'Contributing to software development projects with expertise in cloud computing, networking, and enterprise solutions.',
+      'Promoted to Software Engineer — owning software development end to end across cloud computing, AI-powered tooling, and enterprise solutions.',
+  },
+  {
+    role: 'Associate Software Engineer',
+    org: 'NathCorp Pvt. Ltd. — Ranchi, India',
+    period: 'Previously',
+    description:
+      'Contributed to software development projects with expertise in cloud computing, networking, and enterprise solutions.',
   },
   {
     role: 'SAP MM Module Training',

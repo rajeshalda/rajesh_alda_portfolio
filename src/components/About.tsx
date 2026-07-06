@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import { motion, useScroll, useTransform, useInView, MotionValue } from 'framer-motion'
 
 const BODY_TEXT =
-  'I work at NathCorp Pvt. Ltd. in Ranchi as an Associate Software Engineer, contributing to projects across cloud computing, networking, and enterprise solutions. Certified in Microsoft Azure Fundamentals, Azure Virtual Desktop Specialty, and CCNA — backed by MCA and BCA degrees and hands-on SAP MM training. When I am not shipping, I am cooking, gaming, or chasing whatever technology is next.'
+  'I work at NathCorp Pvt. Ltd. in Ranchi as a Software Engineer, contributing to projects across cloud computing, networking, and enterprise solutions. Certified in Microsoft Azure Fundamentals, Azure Virtual Desktop Specialty, and CCNA — backed by MCA and BCA degrees and hands-on SAP MM training. When I am not shipping, I am cooking, gaming, or chasing whatever technology is next.'
 
 const STATS = [
   { value: '3+', label: 'Certifications' },
